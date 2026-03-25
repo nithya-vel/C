@@ -1,0 +1,28 @@
+int missingNumber(int* nums, int numsSize) {
+     int large =1;
+    /*for(int i=0;i<numsSize;i++){
+        if(nums[i] > large){
+            large = nums[i];
+        }
+    }*/
+    int flag ;
+    int temp = -1 ;
+    for(int i =0;i<large;i++,large++){
+        flag =0;
+        for(int j =0;j<numsSize;j++){
+            if(i == nums[j]){
+                flag =1;
+                break;
+            } 
+        }
+        if( flag == 0){
+            temp = i;
+            break;
+        }
+    }
+    if( temp == -1){
+        temp = large+1;
+    }
+
+return temp;
+}
