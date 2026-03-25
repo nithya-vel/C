@@ -1,0 +1,50 @@
+bool isValid(char* s) {
+    int len = strlen(s);
+    char temp[len];
+    int track = -1;
+    int flag=1;
+    int flag1 =0;
+    int i,j=0,k=0;
+    for(i=len-1;i>=0;i--){
+        flag1 =0;
+        if(s[i] == ')'  || s[i] == ']' || s[i] == '}' && i <len ){
+            track =1;
+            flag1 = 1;
+            j=k;
+            temp[k++] = s[i];
+        }
+        else if(s[i] == '(' || s[i] == '{' ||s[i] == '[' ){
+            if(s[i] == '('  && j > -1 && (temp[j] == '}' || temp[j] == ']')){
+                flag =0;
+                break;
+            }
+            else if(s[i] == '{'  && j > -1 && (temp[j] == ']' || temp[j] == ')')){
+                flag =0;
+                break;
+            }
+            else if(s[i] == '['  && j > -1 && (temp[j] == '}' || temp[j] == ')')){
+                flag =0;
+                break;
+            }
+            else if (track == -1){
+                flag =0;
+                break;
+            }
+            else if(i > 0 && k == 0 && track == 1 && flag1 == 0){
+                flag =0;
+                break;
+            }
+            else{
+                k--;
+                j--;
+            }
+        }
+    }
+    printf("%d",k);
+    if(flag == 1 &&  track != -1 && k ==0 && len >1){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
