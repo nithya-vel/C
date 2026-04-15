@@ -1,0 +1,40 @@
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+int* getRow(int rowIndex, int* returnSize) {
+    int u = rowIndex + 1;
+    int len = 0;
+    int start = 0;
+    int j;
+    for(int i=1;i<= u;i++){
+        len += i;
+        if (i == rowIndex){
+            start = len;
+        }
+    }
+    int x = 0;
+    int dum = -2;
+    int *arr = (int*) malloc(len * sizeof(int));
+    for(int i = 0;i<= rowIndex;i++){
+        dum += 1;
+        for( j = x; j<= x+i;j++){
+            if(j == x || j == x+i){
+                arr[j] = 1;
+            }
+            else{
+                arr[j] = arr[dum] ;
+                dum += 1;
+                arr[j] += arr[dum] ;
+            }
+        }
+        x =j;
+    }
+    *returnSize = rowIndex + 1;
+    int *ans = (int*) malloc(*returnSize * sizeof(int));
+    x =0;
+    for(int i =start;i<len;i++ ){
+        ans[x++] = arr[i];
+    }
+
+    return ans;
+}
