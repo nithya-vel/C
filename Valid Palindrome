@@ -1,0 +1,34 @@
+bool isPalindrome(char* s) {
+    int i,j;
+    int dum = strlen(s);
+    char *temp = (char*)malloc((dum + 1) * sizeof(char));
+    int len = 0;
+    for(i=0;i<dum;i++){
+        if ((s[i] >= 'A' && s[i] <= 'Z') || (s[i] >= 'a' && s[i] <= 'z')|| (s[i] >= '0' && s[i] <= '9')){
+            if(s[i] >= 'A' && s[i] <= 'Z'){
+                temp[len] = s[i] + 32;
+            }
+            else{
+                temp[len] = s[i];
+            }
+            len++;
+    }    
+    }
+    temp[len] = '\0';
+    int mid = len/2;
+    int flag =1;
+    for(i=0,j=len-1;i<=mid && j>= mid;i++,j--){
+        if(temp[i] != temp[j]){
+            printf("%c %c %d",temp[i],temp[j],i);
+            flag =0;
+            break;
+        }
+    }
+    free(temp);
+    if(flag == 1){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
